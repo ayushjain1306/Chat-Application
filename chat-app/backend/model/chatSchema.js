@@ -12,6 +12,10 @@ const chatSchema = new mongoose.Schema({
     last_time: {
         type: Date,
         required: true
+    },
+    last_mes: {
+        type: String,
+        required: true
     }
 })
 

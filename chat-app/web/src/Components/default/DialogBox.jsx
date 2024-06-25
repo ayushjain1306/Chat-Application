@@ -77,6 +77,7 @@ const DialogBox = ({ open, setOpen }) => {
 
     const handleClick = (obj) => {
         setSecondPerson(obj);
+        console.log(obj);
         navigate("chatting");
     }
 

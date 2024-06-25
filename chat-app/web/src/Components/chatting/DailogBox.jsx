@@ -2,11 +2,13 @@ import React, { useState, useContext } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { sendTextMessage, uploadMessageImage } from "../../service/sendMessage.js";
 import { PersonContext } from "../../context/secondPerson.js";
+import { ChatContext } from "../../context/chatsContext.js";
 import getMessages from "../../service/getMessages.js";
 
 const DialogBox = ({ open, setOpen, type, setMessages }) => {
     const [file, setFile] = useState(null);
     const { secondPerson } = useContext(PersonContext);
+    const { flag, setFlag } = useContext(ChatContext);
 
     const handleClose = () => {
         setOpen(false);
@@ -40,6 +42,7 @@ const DialogBox = ({ open, setOpen, type, setMessages }) => {
 
                 if (response){
                     setMessages(response);
+                    setFlag(flag+1);
                 }
             }
 

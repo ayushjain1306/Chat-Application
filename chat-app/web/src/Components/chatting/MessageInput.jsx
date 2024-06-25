@@ -4,6 +4,7 @@ import send from "../../images/send.png";
 import fileUpload from "../../images/folder.png";
 import DialogBox from "./DailogBox.jsx";
 import { PersonContext } from "../../context/secondPerson.js";
+import { ChatContext } from "../../context/chatsContext.js";
 import { sendTextMessage } from "../../service/sendMessage.js";
 import getMessages from "../../service/getMessages.js";
 
@@ -40,6 +41,7 @@ const MessageInput = ({ setMessages }) => {
     const [open, setOpen] = useState(false);
     const [type, setType] = useState(null);
     const { secondPerson } = useContext(PersonContext);
+    const { flag, setFlag } = useContext(ChatContext);
 
     const handleChange = (e) => {
         setInput(e.target.value)
@@ -62,6 +64,7 @@ const MessageInput = ({ setMessages }) => {
 
             if (response){
                 setMessages(response);
+                setFlag(flag+1);
                 setInput("");
             }
         }

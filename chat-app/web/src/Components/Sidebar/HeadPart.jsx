@@ -4,7 +4,8 @@ const divStyle = {
     paddingTop: "2.5vh",
     paddingLeft: "1.5vw",
     paddingRight: "1.5vw",
-    paddingBottom: "1.5vh"
+    paddingBottom: "1.5vh",
+    height: "20vh"
 }
 
 const HeadPart = () => {
@@ -32,7 +33,6 @@ const HeadPart = () => {
                 />
                 <button className="btn btn-primary" type="button" id="button-addon2" onClick={() => handleClick()}>Search</button>
             </div>
-
         </div>
     )
 }

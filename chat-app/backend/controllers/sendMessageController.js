@@ -21,11 +21,11 @@ async function sendTextMessage(request, response){
         const recieverEnd = await Chats.findOne({person1: recieverId, person2: senderId});
 
         if (senderEnd === null && recieverEnd === null){
-            await Chats.create({person1: senderId, person2: recieverId, last_time: new Date(Date.now())});
+            await Chats.create({person1: senderId, person2: recieverId, last_time: new Date(Date.now()), last_mes: data.message});
         }
         else {
             if (senderEnd){
-                await Chats.updateOne({person1: senderId}, {last_time: new Date(Date.now())});
+                await Chats.updateOne({person1: senderId}, {last_time: new Date(Date.now()), last_mes: data.message});
             }
             else {
                 await Chats.updateOne({person2: senderId}, {last_time: new Date(Date.now())});
