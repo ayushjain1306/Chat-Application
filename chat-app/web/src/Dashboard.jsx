@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Outlet } from "react-router-dom";
 import SideContent from "./Components/Sidebar/Sidebar.jsx";
 import OptionsBar from "./Components/options/OptionsBar.jsx";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "./service/userData.js";
+import { UserContext } from "./context/userContext.js";
 
 const divStyle = {
     backgroundColor: "rgb(9 141 247)",
@@ -18,6 +19,7 @@ const outletDiv = {
 
 const Dashboard = () => {
     const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
 
     useEffect(() => {
         const validateUser = async() => {
@@ -26,12 +28,15 @@ const Dashboard = () => {
             if (!userData){
                 navigate("/");
             }
+            else {
+                setUser(userData)
+            }
         }
         validateUser();
-    }, [navigate]);
+    }, [navigate, setUser]);
 
     return (
-        <div style={divStyle}>
+        user && <div style={divStyle}>
             <div>
                 <OptionsBar />
             </div>

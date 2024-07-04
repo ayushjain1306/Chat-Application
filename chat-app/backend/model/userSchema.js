@@ -28,6 +28,26 @@ const userSchema = mongoose.Schema({
     image: {
         type: String,
         default: ""
+    },
+    pincode: {
+        type: Number,
+        default: 0
+    },
+    gender: {
+        type: String,
+        default: null
+    },
+    city: {
+        type: String,
+        default: ""
+    },
+    state: {
+        type: String,
+        default: ""
+    },
+    bio: {
+        type: String,
+        default: ""
     }
 });
 

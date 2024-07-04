@@ -4,7 +4,6 @@ import SignUpWork from "./Signup.jsx";
 import accountImage from "../../images/accountImage.jpeg";
 
 const divStyle = {
-    // backgroundColor: "rgb(0 84 223)",
     backgroundColor: "rgb(9 141 247)",
     height: "100vh",
     width: "100%",
