@@ -1,33 +1,54 @@
 import React from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
-import AcccountWork from "./Components/account/AccountWork";
+import AccountWork from "./Components/account/AccountWork";
+import WelcomeScreen from "./Components/welcome/WelcomeScreen";
+import Chatting from "./Components/chats/Chatting";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet } from "react-native";
+import UserProvider from "./context/UserProvider";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    // <KeyboardAvoidingView
-    //   behavior={Platform.OS === 'ios' ? "padding": "height"}
-    //   style={styles.container}
-    //   // keyboardVerticalOffset={Platform.select({ios: 0, android: 0})}
-    // >
-    <ScrollView contentContainerStyle={styles.scrollView}>
-    <KeyboardAvoidingView 
-      style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
-      behavior="height"
-      enabled
-      // keyboardVerticalOffset={10}
-    >
-      {/* <ScrollView> */}
-        <AcccountWork />
-    </KeyboardAvoidingView>
-      </ScrollView>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Get-Started"
+            component={WelcomeScreen}
+            options={{
+              title: "Welcome",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Login/Signup"
+            component={AccountWork}
+            options={{
+              title: "Login/Signup",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Chats"
+            component={Chatting}
+            options={{
+              title: "Chat",
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
+  navBarStyle: {
+    backgroundColor: "rgb(9 141 247)",
   },
-  scrollView: {
-    flexGrow: 10
-  }
-})
+  navBarTitleStyle: {
+    color: "white",
+  },
+});

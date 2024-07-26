@@ -1,0 +1,23 @@
+#loader-container {
+    height: "100vh";
+    width: "100vw";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader {
+    border: 1px solid transparent;
+    border-right-color: #1100ab;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    animation: spin 1s ease infinite;
+    display: none;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

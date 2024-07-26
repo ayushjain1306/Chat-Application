@@ -38,7 +38,8 @@ const secondDiv = {
 const imageStyle = {
     borderRadius: "50%",
     height: "7vh",
-    marginLeft: "2vw"
+    marginLeft: "2vw",
+    width: "7vh"
 }
 
 const messageDiv = {

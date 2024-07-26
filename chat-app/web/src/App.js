@@ -8,7 +8,8 @@ import Chatting from './Components/chatting/Chatting.jsx';
 import PersonProvider from './context/secondPerson.js';
 import ChatsProvider from './context/chatsContext.js';
 import UserProvider from './context/userContext.js';
-import Settings from './Components/options/Settings.jsx';
+import Settings from './Components/settings/Settings.jsx';
+import BlockedUsers from './Components/settings/BlockedUsers.jsx';
 import Profile from './Components/options/Profile.jsx';
 
 function App() {
@@ -23,7 +24,10 @@ function App() {
               <Route path='/account' element={<Dashboard />}>
                 <Route index element={<Default />} />
                 <Route path='chatting' element={<Chatting />} />
-                <Route path='settings' element={<Settings />} />
+                <Route path='settings'>
+                  <Route index element={<Settings />} />
+                  <Route path='blocked-users' element={<BlockedUsers />} />
+                </Route>
                 <Route path='your-profile' element={<Profile />} />
               </Route>
             </Routes>

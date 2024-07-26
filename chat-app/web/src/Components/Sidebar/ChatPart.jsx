@@ -14,7 +14,14 @@ const divStyle = {
 
 const imageStyle = {
     borderRadius: "50%",
-    height: "7vh"
+    height: "7vh",
+    width: "7vh"
+}
+
+const noChatDiv = {
+    textAlign: "center",
+    fontSize: "13px",
+    color: "grey"
 }
 
 const ChatPart = () => {
@@ -79,8 +86,8 @@ const ChatPart = () => {
 
                 </div>
                 :
-                <div>
-
+                <div style={noChatDiv}>
+                    You haven't chatted yet.
                 </div>
     )
 }

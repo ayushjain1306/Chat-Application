@@ -48,6 +48,10 @@ const userSchema = mongoose.Schema({
     bio: {
         type: String,
         default: ""
+    },
+    profile_type: {
+        type: String,
+        default: "Public"
     }
 });
 

@@ -37,10 +37,12 @@ async function getChats(request, response){
                 const secondPerson = await Users.findOne({ _id: element.person1 });
 
                 const newElement = {
-                    _id: element._id,
+                    _id: secondPerson._id,
                     name: secondPerson.name,
                     username: secondPerson.username,
-                    last_time: element.last_time
+                    image: secondPerson.image,
+                    last_time: element.last_time,
+                    last_mes: element.last_mes.length > 20 ? element.last_mes.substring(0, 20) + "..." : element.last_mes
                 }
 
                 result[i] = newElement;

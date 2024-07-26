@@ -72,7 +72,25 @@ async function performSignup(request, response) {
     }
 }
 
+async function performLogout(request, response){
+    try {
+        const token = request.cookies.token;
+
+        if (!token){
+            return response.status(404).json({message: "Token Not Found."});
+        }
+
+        response.clearCookie("token");
+
+        response.status(200).json({message: "User Logged Out Successfully."});
+    }
+    catch (error){
+        return response.status(500).json({message: error.message});
+    }
+}
+
 export {
     performLogin,
-    performSignup
+    performSignup,
+    performLogout
 }

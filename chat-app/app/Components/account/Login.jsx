@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import axios from "react-native-axios";
+import { URL } from "../../utils/backendURL.js";
 
-const URL = "http://localhost:8000";
-
-const Login = ({ setSignup }) => {
+const Login = ({ setSignup, navigation }) => {
     const [input, setInput] = useState({username: '', password: ''});
 
     const handleChange = (e) => {
@@ -18,10 +17,18 @@ const Login = ({ setSignup }) => {
         }
 
         try {
-            const response = await axios.post(`${URL}/login`, input, { withCredentials: true });
+            await axios.post(`${URL}/login`, input);
+
+            navigation.navigate("Chats");
         }
         catch (error){
-            console.log(error);
+            if (error.response.data.message === "Username not found." || error.response.data.message === "Incorrect password"){
+                alert("Invalid Credentials.");
+            }
+            else {
+                alert("Failed to Log In. Try Again Later.");
+                console.log(error.response.data.message);
+            }
         }
     }
 
@@ -62,20 +69,21 @@ const Login = ({ setSignup }) => {
 
 const styles = StyleSheet.create({
     headDiv: {
-        height: "50%",
+        height: "75%",
         backgroundColor: "white",
-        marginTop: "5%",
-        marginBottom: "5%",
         marginLeft: "10%",
         marginRight: "10%",
-        borderRadius: 10
+        borderRadius: 10,
+        overflowY: "auto",
+        marginTop: "15%",
     },
     text: {
         fontSize: 25,
-        marginBottom: "2%",
+        marginBottom: "4%",
         marginTop: "5%",
         fontWeight: "600",
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: "cursive"
     },
     input: {
         fontSize: 18,

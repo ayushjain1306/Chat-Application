@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import smallLogo from "../../images/smallLogo.png";
 import settings from "../../images/settings.png";
 import editProfile from "../../images/editProfile.png";
 import profilePic from "../../images/profilePic.jpg";
 import { UserContext } from "../../context/userContext.js";
+import HamburgerMenu from "./HamburgerMenu.jsx";
 
 const headDiv = {
     backgroundColor: "inherit",
@@ -30,35 +31,36 @@ const logoStyle = {
 }
 
 const personImage = {
-    height: "40px",
+    height: "48px",
     borderRadius: "50%",
-    backgroundColor: "white",
-    width: "40px",
+    width: "48px",
     padding: "5px",
-    marginTop: "3vh",
+    marginTop: "1.5vh",
     cursor: "pointer"
 }
 
 const profileImage = {
-    height: "7vh",
+    height: "43px",
+    width: "43px",
     borderRadius: "50%",
     marginTop: "1vh",
     marginBottom: "1vh",
-    position: "relative"
+    position: "relative",
+    cursor: "pointer"
 }
 
 const settingImage = {
-    height: "40px",
-    width: "40px",
+    height: "48px",
+    width: "48px",
     borderRadius: "50%",
     padding: "5px",
-    backgroundColor: "white",
     position: "relative",
-    marginTop: "3vh",
+    marginTop: "1.5vh",
     cursor: "pointer"
 }
 
 const OptionsBar = () => {
+    const [open, setOpen] = useState(false);
     const { user } = useContext(UserContext);
 
     return (
@@ -69,8 +71,11 @@ const OptionsBar = () => {
                 <Link to="/account/settings"><img src={settings} style={settingImage} alt="settings" /></Link>
             </div>
             <div style={lowerDiv}>
-                <img src={user.image ? user.image : profilePic} style={profileImage} alt="profilePic" />
+                <img src={user.image ? user.image : profilePic} style={profileImage} alt="profilePic" onClick={() => setOpen(true)} />
             </div>
+            {
+                open && <HamburgerMenu setOpen={setOpen} />
+            }
         </div>
     )
 }

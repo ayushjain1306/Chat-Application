@@ -13,6 +13,7 @@ const noDivStyle = {
 
 const imageStyle = {
     height: '6vh',
+    width: "6vh",
     borderRadius: '50%',
     marginRight: "1.5vw"
 }
@@ -122,7 +123,7 @@ const DialogBox = ({ open, setOpen }) => {
                                     result && result.map((obj) => {
                                         return (
                                             <div style={objectDiv} key={obj._id} onClick={() => handleClick(obj)}>
-                                                <img src={obj.img ? obj.img : profilePic} alt="profile-pictures" style={imageStyle} />
+                                                <img src={obj.image ? obj.image : profilePic} alt="profile-pictures" style={imageStyle} />
                                                 <p className="h5" style={{ fontSize: "20px", fontFamily: "cursive" }}>{obj.username}</p>
                                             </div>
                                         )

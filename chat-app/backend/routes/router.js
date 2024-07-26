@@ -2,13 +2,16 @@ import express from "express";
 import userAuth from "../middleware/userAuth.js";
 import multer from "multer";
 
-import { performLogin, performSignup } from "../controllers/accountController.js";
+import { performLogin, performSignup, performLogout } from "../controllers/accountController.js";
 import { getUserDetails } from "../controllers/userController.js";
 import { findUserDetails } from "../controllers/findUser.js";
 import { sendTextMessage, uploadMessageImage } from "../controllers/sendMessageController.js";
 import getMessages from "../controllers/getMessages.js";
 import { getChats } from "../controllers/chatsController.js";
 import { addImage, addAddress, addCity, addGender, addPincode, addState, addBio, updateAddress } from "../controllers/credentialController.js";
+import { updatePassword, updateUsername, deleteAccount } from "../controllers/accountSettingsController.js";
+import { checkPassword } from "../controllers/checkPassword.js";
+import { blockPerson, unblockPerson, getBlockedUsers } from "../controllers/blockController.js";
 
 const router = express.Router();
 
@@ -20,9 +23,10 @@ router.get("/", (request, response) => {
     response.send("Hello from Server.");
 })
 
-// Login/Signup
+// Login/Signup/Logout
 router.post('/login', performLogin);
 router.post('/signup', performSignup);
+router.delete('/logout', performLogout);
 
 // User Data
 router.get('/get-user-data', userAuth, getUserDetails);
@@ -46,6 +50,15 @@ router.post(`/add-pincode`, userAuth, addPincode)
 router.post(`/add-state`, userAuth, addState)
 router.post(`/add-city`, userAuth, addCity)
 router.post('/add-bio', userAuth, addBio)
-router.post(`/update-address`, userAuth, updateAddress)
+router.post('/update-address', userAuth, updateAddress)
+
+// Routes related to settings
+router.post('/check-password', userAuth, checkPassword);
+router.put('/change-username', userAuth, updateUsername);
+router.put('/change-password', userAuth, updatePassword);
+router.post('/block-person', userAuth, blockPerson);
+router.delete('/unblock-person', userAuth, unblockPerson);
+router.delete("/delete-account", userAuth, deleteAccount);
+router.get('/get-blocked-users', userAuth, getBlockedUsers);
 
 export default router;

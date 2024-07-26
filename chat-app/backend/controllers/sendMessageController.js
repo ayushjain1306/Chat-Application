@@ -25,10 +25,10 @@ async function sendTextMessage(request, response){
         }
         else {
             if (senderEnd){
-                await Chats.updateOne({person1: senderId}, {last_time: new Date(Date.now()), last_mes: data.message});
+                await Chats.updateOne({_id: senderEnd._id}, {last_time: new Date(Date.now()), last_mes: data.message});
             }
             else {
-                await Chats.updateOne({person2: senderId}, {last_time: new Date(Date.now())});
+                await Chats.updateOne({_id: recieverEnd._id}, {last_time: new Date(Date.now()), last_mes: data.message});
             }
         }
 

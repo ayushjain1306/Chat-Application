@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image } from "react-native";
-import accountImage from "../../assets/accountImage.jpeg";
+import { View, StyleSheet, Text } from "react-native";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
+import { Loader } from "../../Loader.jsx";
 
-const AcccountWork = () => {
+const AcccountWork = ({ navigation }) => {
     const [signup, setSignup] = useState(false);
 
     return (
         <View style={styles.headDiv}>
-            <View style={styles.anotherDiv}>
-                <Image source={accountImage} style={styles.image} />
-            </View>
+            <Loader />
             {
-                signup ? <Signup setSignup={setSignup} /> : <Login setSignup={setSignup} />
+                signup ? <Signup setSignup={setSignup} /> : <Login setSignup={setSignup} navigation={navigation} />
             }
+
+            <View>
+                <Text style={styles.backText} onPress={() => navigation.navigate("Get-Started")}>Go Back</Text>
+            </View>
         </View>
     )
 }
@@ -25,17 +27,20 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        overflow: "scroll"
     },
-    image: {
-        height: "80%",
-        width: "80%",
-        margin: "auto"
-    },
-    anotherDiv: {
-        height: "40%",
-        width: "100%",
-        paddingTop: "10%",
+    backText: {
+        fontSize: 18,
+        color: "white",
+        fontWeight: 600,
+        marginTop: "6%",
+        marginBottom: "6%",
+        marginLeft: "10%",
+        marginRight: "10%",
+        textDecorationLine: "underline",
+        textDecorationThickness: 2,
+        cursor: "pointer"
     }
 })
 

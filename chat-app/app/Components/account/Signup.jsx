@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import axios from "react-native-axios";
+import { URL } from "../../utils/backendURL.js";
 
 const Signup = ({ setSignup }) => {
     const [input, setInput] = useState({
@@ -14,8 +16,31 @@ const Signup = ({ setSignup }) => {
         setInput({ ...input, [e.target.id]: e.target.value });
     }
 
-    const handleClick = () => {
-        
+    const handleClick = async () => {
+        if (input.name === "" || input.email === "" || input.phone === "" || input.username === "" || input.password === ""){
+            alert("Please fill all the fields.");
+            return;
+        }
+
+        try {
+            await axios.post(`${URL}/signup`, input);
+            setSignup(false);
+        }
+        catch (error){
+            if (error.response.data.message === "Phone Number not available."){
+                alert("Account on this Phone Number Already Exists")
+            }
+            else if (error.response.data.message === "Username not available."){
+                alert("User with this Username Already Exists")
+            }
+            else if (error.response.data.message === "Email not available."){
+                alert("Account on this Email Address Already Exists")
+            }
+            else {
+                console.log(error.response.data.message);
+                alert("Failed to create account. Try again Later.");
+            }
+        }
     }
 
     const handleClickAnother = () => {
@@ -32,21 +57,21 @@ const Signup = ({ setSignup }) => {
             <TextInput
                 placeholder="Enter your Name"
                 id="name"
-                value={input.username}
+                value={input.name}
                 style={styles.input}
                 onChange={(e) => handleChange(e)}
             />
             <TextInput
                 placeholder="Enter your Email"
                 id="email"
-                value={input.username}
+                value={input.email}
                 style={styles.input}
                 onChange={(e) => handleChange(e)}
             />
             <TextInput
                 placeholder="Enter your Phone Number"
                 id="phone"
-                value={input.username}
+                value={input.phone}
                 style={styles.input}
                 onChange={(e) => handleChange(e)}
             />
@@ -60,7 +85,7 @@ const Signup = ({ setSignup }) => {
             <TextInput
                 placeholder="Create Password"
                 id="password"
-                value={input.username}
+                value={input.password}
                 style={styles.input}
                 onChange={(e) => handleChange(e)}
             />
@@ -78,31 +103,31 @@ const Signup = ({ setSignup }) => {
 
 const styles = StyleSheet.create({
     headDiv: {
-        height: "53%",
+        height: "75%",
         backgroundColor: "white",
-        marginTop: "5%",
-        marginBottom: "5%",
+        marginTop: "15%",
         marginLeft: "10%",
         marginRight: "10%",
         borderRadius: 10
     },
     text: {
-        fontSize: 22,
-        marginBottom: "2%",
-        marginTop: "4%",
+        fontSize: 25,
+        marginBottom: "4%",
+        marginTop: "5%",
         fontWeight: "600",
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: "cursive"
     },
     input: {
-        fontSize: 14,
+        fontSize: 18,
         borderRadius: 5,
-        marginTop: 5,
+        marginTop: 8,
         marginLeft: "8%",
-        marginBottom: 7,
+        marginBottom: 15,
         marginRight: "8%",
-        paddingTop: 5,
+        paddingTop: 7.5,
         paddingLeft: 7.5,
-        paddingBottom: 5,
+        paddingBottom: 7.5,
         paddingRight: 7.5,
         borderWidth: 1,
         borderStyle: "solid",

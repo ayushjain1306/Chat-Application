@@ -58,6 +58,19 @@
   border-radius: 5px;
 }
 
+#settings-div::-webkit-scrollbar {
+  width: 7px;
+}
+
+#settings-div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#settings-div::-webkit-scrollbar-thumb {
+  background: rgba(3, 27, 244, 0.3);
+  border-radius: 5px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
