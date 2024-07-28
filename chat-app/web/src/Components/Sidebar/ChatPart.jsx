@@ -24,8 +24,7 @@ const noChatDiv = {
     color: "grey"
 }
 
-const ChatPart = () => {
-    const [chats, setChats] = useState([]);
+const ChatPart = ({ chats, setChats }) => {
     const [loading, setLoading] = useState(false);
     const { flag } = useContext(ChatContext);
     const { setSecondPerson } = useContext(PersonContext);
@@ -44,7 +43,7 @@ const ChatPart = () => {
         }
 
         findChats();
-    }, [flag]);
+    }, [flag, setChats]);
 
     const handleClick = (chat) => {
         setSecondPerson({

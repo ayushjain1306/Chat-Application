@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HeadPart from "./HeadPart.jsx";
 import ChatPart from "./ChatPart.jsx";
 
@@ -9,10 +9,12 @@ const divStyle = {
 }
 
 const SideContent = () => {
+    const [chats, setChats] = useState([]);
+
     return (
         <div style={divStyle}>
-            <HeadPart />
-            <ChatPart />
+            <HeadPart chats={chats} />
+            <ChatPart chats={chats} setChats={setChats} />
         </div>
     )
 }
