@@ -4,7 +4,7 @@ import WelcomeScreen from "./Components/welcome/WelcomeScreen";
 import Chatting from "./Components/chats/Chatting";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import UserProvider from "./context/UserProvider";
 
 const Stack = createNativeStackNavigator();
@@ -12,6 +12,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <UserProvider>
+      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -40,6 +41,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      </KeyboardAvoidingView>
     </UserProvider>
   );
 }

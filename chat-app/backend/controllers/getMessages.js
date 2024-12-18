@@ -9,8 +9,8 @@ async function getMessages(request, response){
         const sender = await Users.findOne({ username });
 
         if (sender){
-            const senderEnd = await Messages.find({sender_id: sender._id, reciever_id: recieverId});
-            const recieverEnd = await Messages.find({sender_id: recieverId, reciever_id: sender._id});
+            const senderEnd = await Messages.find({sender_id: sender._id, reciever_id: recieverId, delete_status: {$ne: sender._id}});
+            const recieverEnd = await Messages.find({sender_id: recieverId, reciever_id: sender._id, delete_status: {$ne: sender._id}});
 
             return response.status(200).json([...senderEnd, ...recieverEnd]);
         }

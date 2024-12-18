@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { PersonContext } from "../../context/secondPerson.js";
 import { List, ListItem } from "@mui/material";
 import downloadImage from "../../images/downloadImage.png";
@@ -57,6 +57,8 @@ const pStyle = {
 const Messages = ({ messages }) => {
     const { secondPerson } = useContext(PersonContext);
     const divRef = useRef(null);
+    const [messageId, setMessageId] = useState(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if (divRef.current) {

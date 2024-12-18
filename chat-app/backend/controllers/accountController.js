@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 function generateToken(username){
-    const token = jwt.sign({username}, process.env.JWT_SECRET_KEY, {expiresIn: "1h"});
+    const token = jwt.sign({username}, process.env.JWT_SECRET_KEY_APP, {expiresIn: "1h"});
 
     return token;
 }
@@ -13,6 +13,7 @@ function generateToken(username){
 async function performLogin(request, response){
     try {
         const user = request.body;
+        const app = request.app;
 
         const check = await Users.findOne({username: user.username});
 
@@ -32,7 +33,10 @@ async function performLogin(request, response){
             sameSite: "strict"
         });
 
-        return response.status(200).json({message: "User logged in successfully."});
+        return response.status(200).json({
+            message: "User logged in successfully.",
+            token: app && token
+        });
     }
     catch (error){
         response.status(500).json({message: error.message});

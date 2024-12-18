@@ -1,5 +1,5 @@
 import express from "express";
-import userAuth from "../middleware/userAuth.js";
+import userAuth from "../middleware/userAppAuth.js";
 import multer from "multer";
 
 import { performLogin, performSignup, performLogout } from "../controllers/accountController.js";
@@ -25,7 +25,7 @@ router.get("/", (request, response) => {
 })
 
 // Login/Signup/Logout
-router.post('/login', performLogin);
+router.post('/login', (request, response, next) => {request.app = true; next();}, performLogin);
 router.post('/signup', performSignup);
 router.delete('/logout', performLogout);
 

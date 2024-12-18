@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
-import { Loader } from "../../Loader.jsx";
 
 const AcccountWork = ({ navigation }) => {
     const [signup, setSignup] = useState(false);
 
     return (
         <View style={styles.headDiv}>
-            <Loader />
             {
                 signup ? <Signup setSignup={setSignup} /> : <Login setSignup={setSignup} navigation={navigation} />
             }
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
     backText: {
         fontSize: 18,
         color: "white",
-        fontWeight: 600,
+        fontWeight: "600",
         marginTop: "6%",
         marginBottom: "6%",
         marginLeft: "10%",

@@ -32,6 +32,10 @@ const messageSchema = new mongoose.Schema({
     type: {
         type: String,
         default: null
+    },
+    delete_status: {
+        type: mongoose.Schema.ObjectId,
+        default: null
     }
 });
 
